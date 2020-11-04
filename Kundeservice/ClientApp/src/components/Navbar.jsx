@@ -7,13 +7,14 @@ export default class NavBar extends Component {
         return (
             
             <div id="navbar">
-                <Link to="/">
+                <Link to="/losning">
                     <img
                         src="/Bilder/logo.svg"
                         alt="NOR-WAY sin logo. NOR i bold rødt og WAY i bold kursiv blått.
         De to ordene skilles av en rød prikk" />
                 </Link>
                 <ul>
+                    <li><Link to="/"> Kundeservice </Link></li>
                     <li><Link to="/kontakt"> Kontakt oss</Link></li>
                 </ul>   
                 </div>
