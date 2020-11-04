@@ -1,0 +1,24 @@
+﻿#faq {
+    height:50vh;
+    position:relative;
+    margin: auto;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding: 35px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 70vw;
+    border-radius: 7px;
+    overflow-x: auto;
+}
+
+#faq h2 {
+    text-align: center;
+}
+
+
+
+    #faq li {
+        color: black;
+        display: block;
+    }

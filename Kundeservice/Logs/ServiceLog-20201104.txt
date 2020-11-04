@@ -1,0 +1,6 @@
+2020-11-04T07:20:55.5986475+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-11-04T07:20:55.6097418+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-11-04T07:20:55.6123764+01:00  [INF] Content root path: "C:\Users\pmhog\Documents\ITPE3200\Prosjekter\Del3\Kundeservice\Kundeservice" (b5d60022)
+2020-11-04T07:21:04.8264692+01:00  [ERR] Browserslist: caniuse-lite is outdated. Please run:
+ (02daff8f)
+2020-11-04T07:21:11.3141597+01:00 80000033-0001-fd00-b63f-84710c7967bb [INF] Microsoft.AspNetCore.Mvc.OkObjectResult (f2054f3f)

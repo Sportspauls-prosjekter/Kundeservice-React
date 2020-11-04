@@ -1,0 +1,32 @@
+
+
+img {
+    padding-top: 1vh;
+    margin-left: 2vw;
+    height: 4vh;
+}
+
+ul li {
+    list-style: none;
+    display: inline;
+    color: rgb(255,255,255);
+    margin-left: 2vw;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+ul {
+    position: absolute;
+    display: inline;
+}        
+        ul li a {
+        -webkit-font-smoothing: antialiased !important;
+        color:white;
+
+        text-decoration: none;
+        }
+
+            ul li a:hover {
+                text-decoration: none;
+                color: rgb(190,190,190);
+            }
