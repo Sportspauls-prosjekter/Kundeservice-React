@@ -31,14 +31,14 @@ namespace Kundeservice.Controllers
             List<Faqs> sporsmaalene = await _db.HentAlle();
             if(sporsmaalene.IsNullOrEmpty())
             {
-                _log.LogWarning($"{Ok(sporsmaalene)}");
-                return NotFound("Ingen Spørsmål funnet");
+                _log.LogWarning("Ingen Spørsmål funnet");
+                return NotFound();
             }
             _log.LogInformation($"{Ok(sporsmaalene)}");
             return Ok(sporsmaalene);
         }
 
-        [HttpGet("{id}")]
+       [HttpGet("{id}")]
         public async Task<ActionResult> HentEn(int id)
         {
             if (ModelState.IsValid)
@@ -47,13 +47,13 @@ namespace Kundeservice.Controllers
                 if (faqen == null)
                 {
                     _log.LogInformation("Fant ikke spørsmålsobjektet");
-                    return NotFound("Fant ikke spørsmålsobjektet");
+                    return NotFound();
                 }
                 _log.LogInformation($"{Ok(faqen)}");
                 return Ok(faqen);
             }
             _log.LogInformation("Feil i inputvalidering");
-            return BadRequest("Feil i inputvalidering");
+            return BadRequest();
         }
 
         [HttpPost]
@@ -65,12 +65,12 @@ namespace Kundeservice.Controllers
                 if (!returOK)
                 {
                     _log.LogInformation("Spørsmålsobjektet kunne ikke lagres!");
-                    return BadRequest("Spørsmålsobjektet kunne ikke lagres!");
+                    return BadRequest();
                 }
                 return Ok(); 
             }
             _log.LogInformation("Feil i inputvalidering");
-            return BadRequest("Spørsmålsobjektet kunne ikke lagres!");
+            return BadRequest();
         }
 
         [HttpPut]
@@ -82,13 +82,13 @@ namespace Kundeservice.Controllers
                 if (!returOK)
                 {
                     _log.LogInformation("FAQ ble ikke funnet");
-                    return NotFound("FAQ ble ikke funnet");
+                    return NotFound();
                 }
                 _log.LogInformation("Endringen av FAQ-objektet ble utført");
-                return Ok("Endringen av FAQ-objektet ble utført");
+                return Ok();
             }
             _log.LogWarning("Feil i inputvalidering");
-            return BadRequest("Feil i inputvalidering");
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]
@@ -98,12 +98,11 @@ namespace Kundeservice.Controllers
             if (!returOK)
             {
                 _log.LogWarning("Sletting av spørsmålet ble ikke utført");
-                return NotFound("Sletting av spørsmålet ble ikke utført");
+                return NotFound();
             }
             _log.LogInformation("Sletting av spørsmålet ble utført");
-            return Ok("Sletting av spørsmålet ble utført");
-
-        }
+            return Ok();
+        } 
 
     }
 }
