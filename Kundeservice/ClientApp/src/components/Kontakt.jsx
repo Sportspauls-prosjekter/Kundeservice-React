@@ -5,7 +5,7 @@ export default class Kontakt extends Component {
     render() {
         return (
             <div id="kontaktinfo">
-                <p>Implenteres senere</p>
+                <h1>Kontakt NOR-WAY kundeservice</h1>
             </div>
         );
     }
