@@ -28,9 +28,27 @@ export default class Home extends Component {
         return (
             <div id="faq">
                 <h2> Velkommen til NOR-WAY kundeservice </h2>
-            <ul>
-                {this.state.faqs.map(question => <li key={question.id}>{question.sporsmaal}</li>)} 
-            </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Spørsmål</th>
+                            <th>Svar</th>
+                            <th>Tema</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {this.state.faqs.map(question => (
+                                <tr key={question.id}>
+                                    <td>{question.sporsmaal}</td>
+                                    <td>{question.svar}</td>
+                                    <td>{question.tema}</td>
+                                    <td>{question.rating}</td>
+                                </tr>)
+                            )
+                        } 
+                   </tbody>
+            </table>
             </div>
         );
     }
