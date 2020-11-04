@@ -1,9 +1,12 @@
 ﻿import React, { Component } from 'react';
+import '../Style/kontakt.css';
 
 export default class Kontakt extends Component {
     render() {
         return (
-            <p>Implenteres senere</p>
+            <div id="kontaktinfo">
+                <p>Implenteres senere</p>
+            </div>
         );
     }
 }
