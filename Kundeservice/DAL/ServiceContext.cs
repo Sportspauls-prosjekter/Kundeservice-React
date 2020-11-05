@@ -9,7 +9,7 @@ namespace Kundeservice.DAL
         public int Id { get; set; }  // gir en primærnøkkel med autoincrement fordi attributten heter noe med "id"
         public string Sporsmaal { get; set; }
         public string Svar { get; set; }
-        public string Tema { get; set; }
+        public string Kategori { get; set; }
         public int Rating { get; set; }
           
     }

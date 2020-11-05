@@ -33,7 +33,7 @@ export default class Home extends Component {
                         <tr>
                             <th>Spørsmål</th>
                             <th>Svar</th>
-                            <th>Tema</th>
+                            <th>Kategori</th>
                             <th>Rating</th>
                         </tr>
                     </thead>
@@ -42,7 +42,7 @@ export default class Home extends Component {
                                 <tr key={question.id}>
                                     <td>{question.sporsmaal}</td>
                                     <td>{question.svar}</td>
-                                    <td>{question.tema}</td>
+                                    <td>{question.kategori}</td>
                                     <td>{question.rating}</td>
                                 </tr>)
                             )

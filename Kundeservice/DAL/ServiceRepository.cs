@@ -24,7 +24,7 @@ namespace Kundeservice.DAL
                
                 endreObjekt.Sporsmaal = innFaq.Sporsmaal;
                 endreObjekt.Svar = innFaq.Svar;
-                endreObjekt.Tema = innFaq.Tema;
+                endreObjekt.Kategori = innFaq.Kategori;
                 endreObjekt.Rating = innFaq.Rating;
                 await _db.SaveChangesAsync();
             }
@@ -44,7 +44,7 @@ namespace Kundeservice.DAL
                     Id = faq.Id,
                     Sporsmaal = faq.Sporsmaal,
                     Svar = faq.Svar,
-                    Tema = faq.Tema,
+                    Kategori = faq.Kategori,
                     Rating = faq.Rating
 
                 }).ToListAsync();
@@ -64,7 +64,7 @@ namespace Kundeservice.DAL
                 Id = hentetObjekt.Id,
                 Sporsmaal = hentetObjekt.Sporsmaal,
                 Svar = hentetObjekt.Svar,
-                Tema = hentetObjekt.Tema,
+                Kategori = hentetObjekt.Kategori,
                 Rating = hentetObjekt.Rating
             };
             return hentetFaq;
@@ -79,7 +79,7 @@ namespace Kundeservice.DAL
                     Id = innFaq.Id,
                     Sporsmaal = innFaq.Sporsmaal,
                     Svar = innFaq.Svar,
-                    Tema = innFaq.Tema,
+                    Kategori = innFaq.Kategori,
                     Rating = innFaq.Rating
                 };
 

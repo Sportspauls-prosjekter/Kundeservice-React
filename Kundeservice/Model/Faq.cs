@@ -14,7 +14,7 @@ namespace Kundeservice.Model
         [RegularExpression(@"[a-zA-ZæøåÆØÅ. \- ?/!]{7,80}")]
         public string Svar { get; set; }
         [RegularExpression(@"[a-zA-ZæøåÆØÅ. \- ?/!]{7,80}")]
-        public string Tema { get; set; }
+        public string Kategori { get; set; }
         public int Rating { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace Kundeservice.DAL
                 Id = 1,
                 Sporsmaal = "Kan jeg bestille tur/retur-reise på en rute?",
                 Svar = "Nei",
-                Tema = "Reise",
+                Kategori = "Reise",
                 Rating = 1
             };
             var faq2 = new Faqs
@@ -33,7 +33,7 @@ namespace Kundeservice.DAL
                 Id = 2,
                 Sporsmaal = "Kan jeg bestille reise på telefonen?",
                 Svar = "Nei",
-                Tema = "Reise",
+                Kategori = "Reise",
                 Rating = 3
             };
             var faq3 = new Faqs
@@ -41,7 +41,7 @@ namespace Kundeservice.DAL
                 Id = 3,
                 Sporsmaal = "Kan jeg se mine ordre på nettsiden?",
                 Svar = "Nei",
-                Tema = "Ordre",
+                Kategori = "Ordre",
                 Rating = -3
             };
 
