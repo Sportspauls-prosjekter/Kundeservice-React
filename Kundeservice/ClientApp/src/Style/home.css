@@ -18,7 +18,17 @@
 
 
 
-    #faq li {
-        color: black;
-        display: block;
-    }
+#faq li {
+    color: black;
+    display: block;
+}
+
+.kategori {
+    display: inline-block;
+    margin-left: 5vw;
+    width: 25vw;
+}
+
+.kategori p {
+    padding: 10px;
+}
