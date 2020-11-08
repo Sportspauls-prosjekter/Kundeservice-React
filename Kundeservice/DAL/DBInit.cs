@@ -44,6 +44,14 @@ namespace Kundeservice.DAL
                 Kategori = "Ordre",
                 Rating = -3
             };
+            var faq4 = new Faqs
+            {
+                Id = 4,
+                Sporsmaal = "Er det mulig å se neste bussavgang i rutetabellen?",
+                Svar = "Nei",
+                Kategori = "Rutetabell",
+                Rating = 1
+            };
 
             db.Faqs.Add(faq1);
             db.Faqs.Add(faq2);

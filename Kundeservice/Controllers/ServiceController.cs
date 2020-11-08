@@ -72,37 +72,5 @@ namespace Kundeservice.Controllers
             _log.LogInformation("Feil i inputvalidering");
             return BadRequest();
         }
-
-        [HttpPut]
-        public async Task<ActionResult> Endre(Faq innFaq)
-        {
-            if (ModelState.IsValid)
-            {
-                bool returOK = await _db.Endre(innFaq);
-                if (!returOK)
-                {
-                    _log.LogInformation("FAQ ble ikke funnet");
-                    return NotFound();
-                }
-                _log.LogInformation("Endringen av FAQ-objektet ble utført");
-                return Ok();
-            }
-            _log.LogWarning("Feil i inputvalidering");
-            return BadRequest();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Slett(int id)
-        {
-            bool returOK = await _db.Slett(id);
-            if (!returOK)
-            {
-                _log.LogWarning("Sletting av spørsmålet ble ikke utført");
-                return NotFound();
-            }
-            _log.LogInformation("Sletting av spørsmålet ble utført");
-            return Ok();
-        } 
-
     }
 }

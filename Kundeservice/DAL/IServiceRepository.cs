@@ -8,8 +8,6 @@ namespace Kundeservice.DAL
     {
         Task<bool> Lagre(Faq innFaq);
         Task<List<Faqs>> HentAlle();
-        Task<bool> Slett(int id);
         Task<Faq> HentEn(int id);
-        Task<bool> Endre(Faq endreFaq);
     }
 }

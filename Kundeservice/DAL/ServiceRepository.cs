@@ -16,24 +16,7 @@ namespace Kundeservice.DAL
         {
             _db = db;
         }
-        public async Task<bool> Endre(Faq innFaq)
-        {
-            try
-            {
-                Faqs endreObjekt = await _db.Faqs.FindAsync(innFaq.Id);
-               
-                endreObjekt.Sporsmaal = innFaq.Sporsmaal;
-                endreObjekt.Svar = innFaq.Svar;
-                endreObjekt.Kategori = innFaq.Kategori;
-                endreObjekt.Rating = innFaq.Rating;
-                await _db.SaveChangesAsync();
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
-        }
+        
 
         public async Task<List<Faqs>> HentAlle()
         {
@@ -84,21 +67,6 @@ namespace Kundeservice.DAL
                 };
 
                 _db.Faqs.Add(nyFaqRad);
-                await _db.SaveChangesAsync();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> Slett(int id)
-        {
-            try
-            {
-                Faqs enDBFaqs = await _db.Faqs.FindAsync(id);
-                _db.Faqs.Remove(enDBFaqs);
                 await _db.SaveChangesAsync();
                 return true;
             }

@@ -14,7 +14,7 @@ export default class Losning extends Component {
                         <Button variant="info">Tilbake til kundeservice </Button>
                     </Link>
                  </div>
-                
+
                 <img 
                     src="/Bilder/billettkjop.jpg"
                     alt="NOR-WAY sin Billettkjøpmeny for enveisreiser" />

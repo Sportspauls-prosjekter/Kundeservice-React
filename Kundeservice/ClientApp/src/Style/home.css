@@ -25,10 +25,9 @@
 
 .kategori {
     display: inline-block;
-    margin-left: 5vw;
-    width: 25vw;
+    padding: 2px;
+    margin-left: 1vw;
+    width: 5vw;
 }
 
-.kategori p {
-    padding: 10px;
-}
+
