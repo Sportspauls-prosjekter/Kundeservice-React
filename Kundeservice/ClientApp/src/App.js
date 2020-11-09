@@ -12,7 +12,7 @@ export default class App extends Component {
 
   render () {
       return (
-        <div id="Overlay">
+        <div id="overlay">
            < NavBar />
           <div id="Content">
               <Route exact path="/" component={ Home } />

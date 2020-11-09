@@ -3,17 +3,11 @@
 }
 
 body {
-    background-color: #f5f7ff; 
-    background: url(/Bilder/bakgrunn.jpg), 
-        linear-gradient( 180deg, 
-    rgba(0, 0, 0, 90) 0%, 
-    rgba(0, 0, 0, 0.8) 25%, 
-    rgba(0, 0, 0, 0.7) 50%, 
-    rgba(0, 0, 0, 0.6) 75%, 
-    rgba(0, 0, 0, 0.4) 100% );
+    background-color: #f5f7ff;
+    background-image: url(/Bilder/bakgrunn.jpg), linear-gradient( 180deg, rgba(0, 0, 0, 90) 0%, rgba(0, 0, 0, 0.8) 25%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.6) 75%, rgba(0, 0, 0, 0.4) 100% );
     background-position: center;
     background-attachment: fixed;
-    background-size: cover; 
+    background-size: cover;
 }
 
 #root {

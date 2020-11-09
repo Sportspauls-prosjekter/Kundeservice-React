@@ -52,10 +52,29 @@ namespace Kundeservice.DAL
                 Kategori = "Rutetabell",
                 Rating = 1
             };
+            var faq5 = new Faqs
+            {
+                Id = 5,
+                Sporsmaal = "Får man se hvor lang tid det tar fra første til siste stopp?",
+                Svar = "Ja",
+                Kategori = "Rutetabell",
+                Rating = 4
+            };
+            var faq6 = new Faqs
+            {
+                Id = 6,
+                Sporsmaal = "Er det mulig å endre ordren før jeg betaler?",
+                Svar = "Ja",
+                Kategori = "Ordre",
+                Rating = 0
+            };
 
             db.Faqs.Add(faq1);
             db.Faqs.Add(faq2);
             db.Faqs.Add(faq3);
+            db.Faqs.Add(faq4);
+            db.Faqs.Add(faq5);
+            db.Faqs.Add(faq6);
 
             db.SaveChanges();
 
