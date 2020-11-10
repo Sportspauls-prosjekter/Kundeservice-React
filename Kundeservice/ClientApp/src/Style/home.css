@@ -1,6 +1,6 @@
 ﻿#faq {
-    height:50vh;
-    position:relative;
+    height: 150vh;
+    position: relative;
     margin: auto;
     box-sizing: border-box;
     background-color: #ffffff;
@@ -12,22 +12,34 @@
     overflow-x: auto;
 }
 
-#faq h2 {
-    text-align: center;
-}
+    #faq h2 {
+        text-align: center;
+    }
 
 
 
-#faq li {
-    color: black;
-    display: block;
-}
+    #faq li {
+        color: black;
+        display: block;
+    }
 
 .kategori {
     display: inline-block;
     padding: 2px;
     margin-left: 1vw;
-    width: 5vw;
+    width: 7vw;
 }
+
+#lagre {
+    display: inline-block;
+    margin-left: 30vw;
+}
+
+.endreRating {
+    margin: 1px 5px;
+
+}
+
+
 
 

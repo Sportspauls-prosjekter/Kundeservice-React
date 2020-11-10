@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /Kundeservice/Service.db
+/Kundeservice/ClientApp/.vscode
