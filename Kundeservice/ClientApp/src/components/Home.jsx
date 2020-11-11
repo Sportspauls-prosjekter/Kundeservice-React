@@ -1,5 +1,7 @@
 ﻿import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
 import Accordion from 'react-bootstrap/Accordion';
@@ -9,71 +11,102 @@ import '../Style/home.css';
 
 
 export default class Home extends Component {
-
     
-
     constructor(props) {
         super(props);
         this.state = {
             faqs: [],
-            open: false
+            filtrert: [],
+            open: false,
+            nyKategori : "",
+            nySporsmaal : "",
+            nySvar: "Svaret kommer innen kort tid.",
+            nyRating : 0 
         };
     }
 
+
+
     async componentDidMount() {
-        const { data } = await axios.get(`https://localhost:44383/api/service`);
-        this.setState({ faqs: data});
-    }
-
-    finneKategoriFAQ = (e) => {
-
-        const filtrert = this.state.filtrert.filter(kat => kat.kategori === e.target.value);
-        this.setState({ filtrert});
-    }
-
-    async sendInnSporsmaal(event) {
-        const url = `https://localhost:44383/api/service`;
+        {/*Feilhåndtering*/}
+        const { data } = await axios.get("/");
         
-        {/*let sendData = () => {
-            await axios.post(url, formData)
+        this.setState({ faqs: data });
+        this.setState({ filtrert: data });       
+    }
+
+    velgKategori = (e) => {
+        console.log(e.target.value)
+        this.setState({ nyKategori: e.target.value });
+    }
+
+    nyttSporsmaal = (e) => {
+        this.setState({ nySporsmaal: e.target.value });
+    }
+
+    bedreRating = (id) => {
+    }
+
+  
+    sendInnSporsmaal = async (e) => {
+        {/*Feilhåndtering*/ }
+        const id = this.state.faqs.length + 1;
+        const nyFaq = {
+            id: id,
+            sporsmaal : this.state.nySporsmaal,
+            svar: this.state.nySvar,
+            kategori: this.state.nyKategori, 
+            rating: this.state.nyRating
         }
-        event.preventDefault(); */}
+       
+        {/*Feilhåndtering*/ }
+        await axios.post("/", { nyFaq }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        console.log(nyFaq)
     }
    
     render() {
         
         return (
             <div id="faq">
-                <h2> Velkommen til NOR-WAY kundeservice </h2>
-                <Button className="kategori" onClick={this.finneKategoriFAQ} value="Reise" variant="primary"> Reise </Button>
-                <Button className="kategori" onClick={this.finneKategoriFAQ} value="Ordre" variant="primary"> Ordre </Button>
-                <Button className="kategori" onClick={this.finneKategoriFAQ} value="Rutetabell" variant="primary"> Rutetabell </Button>
+                <h2> Velkommen til NOR-WAY FAQ </h2>
+                {/*TODO: filtrere og vise på siden*/}
+                <Button className="kategori" value="Reise" variant="primary"> Reise </Button>
+                <Button className="kategori" value="Bestilling" variant="primary"> Bestilling </Button>
+                <Button className="kategori" value="Rutetabell" variant="primary"> Rutetabell </Button>
                 <Button variant="success" className="kategori" id="lagre" onClick={() => this.setState({open: !this.state.open })} >
                     Nytt spørsmål </Button>
+
+                {/* Skjema for å legge til nytt spørsmål */}
                 <Collapse in={this.state.open}>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.sendInnSporsmaal}>
                    
-                        <Form.Control
+                        <Form.Control onChange={this.velgKategori.bind(this)}
                             as="select"
+                            value={this.state.nyKategori}
                             className="mr-sm-2"
                             id="inlineFormCustomSelect" custom>
+
+                            <option value="Bestilling">Bestilling</option>
                             <option value="Reise">Reise</option>
-                            <option value="Ordre">Ordre</option>
                             <option value="Rutetabell">Rutetabell</option>
                         </Form.Control>
 
                         <Form.Group controlId="question">
                             <Form.Label>Still ditt spørsmål:</Form.Label>
-                            <Form.Control placeholder="Hva lurer jeg på?" />
+                            <Form.Control onChange={this.nyttSporsmaal} placeholder="Hva lurer jeg på?" />
                         </Form.Group>
                         {/* Svaret til spørsmålet er bare i webappen for syns skyld. Ved utvidelse kan en FAQ vedlikeholdes.*/}
                         <Form.Group controlId="answer">
                             <Form.Label>Svar:</Form.Label>
-                            <Form.Control plaintext readOnly defaultValue="Svaret kommer innen kort tid." />
+                            <Form.Control plaintext readOnly  defaultValue="Svaret kommer innen kort tid." />
                         </Form.Group>
                         <Form.Group controlId="rating">
                             <Form.Label>Initial rating:</Form.Label>
-                            <Form.Control  readOnly defaultValue="0" />
+                            <Form.Control readOnly defaultValue="0" />
                         </Form.Group>
 
                         <Button variant="primary" type="submit">
@@ -81,14 +114,15 @@ export default class Home extends Component {
                         </Button>
                         </Form>
                 </Collapse>
-                {this.state.faqs.map( faq => <Accordion key={faq.id}>
 
+                {/* Presentasjon av FAQ-objektene ved hjelp av Collapse-objekter */}
+                {this.state.filtrert.map(faq => <Accordion key={faq.id}>
+                    <Row>
+                        <Col sm={9} >
                     <Card>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                {faq.sporsmaal}   <Button className="endreRating" variant="success"> +</Button>
-                                {faq.rating}
-                                    <Button className="endreRating" variant="danger">-</Button> 
+                                        {faq.sporsmaal}  
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
@@ -97,11 +131,23 @@ export default class Home extends Component {
                               
                             </Card.Body>
                         </Accordion.Collapse>
-                    </Card>  
-                </Accordion>) }
+                            </Card>  </Col>
+                        <Col sm={3}>
+                            <Card>
+                                { /*TODO: Sortere basert på rating */}
+                            <Card.Body>
+                            <Button className="endreRating" variant="success">+</Button>
+                             {faq.rating}
+                            <Button className="endreRating" variant="danger">-</Button>
+                            </Card.Body>
+                    </Card> </Col>
+                        </Row>
+                </Accordion>)
+                }
             </div>
 
 
         );
     }
 }
+

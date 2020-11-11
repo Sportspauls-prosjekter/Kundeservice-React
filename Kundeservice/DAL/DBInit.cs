@@ -14,7 +14,6 @@ namespace Kundeservice.DAL
             var serviceScope = app.ApplicationServices.CreateScope();
 
             var db = serviceScope.ServiceProvider.GetService<ServiceContext>();
-            //TODO: Seede resten
 
             // må slette og opprette databasen hver gang når den skal initieres (seed`es)
             db.Database.EnsureDeleted();

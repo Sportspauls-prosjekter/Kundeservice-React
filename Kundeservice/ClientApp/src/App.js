@@ -5,6 +5,9 @@ import Losning from "./components/Losning.jsx";
 import Kontakt from './components/Kontakt.jsx';
 import NavBar from './components/Navbar.jsx';
 import './Style/app.css';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://localhost:44383/api/service';
 
 
 export default class App extends Component {
