@@ -40,7 +40,7 @@ namespace Kundeservice.DAL
                 Id = 3,
                 Sporsmaal = "Kan jeg se mine ordre på nettsiden?",
                 Svar = "Nei",
-                Kategori = "Ordre",
+                Kategori = "Bestilling",
                 Rating = -3
             };
             var faq4 = new Faqs
@@ -64,7 +64,7 @@ namespace Kundeservice.DAL
                 Id = 6,
                 Sporsmaal = "Er det mulig å endre ordren før jeg betaler?",
                 Svar = "Ja",
-                Kategori = "Ordre",
+                Kategori = "Bestilling",
                 Rating = 0
             };
 

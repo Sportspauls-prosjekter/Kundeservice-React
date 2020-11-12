@@ -11,6 +11,16 @@ import '../Style/home.css';
 
 
 export default class Home extends Component {
+    state = {
+        faqs: [],
+        filtrert: [],
+        open: false,
+        nyKategori: "",
+        nySporsmaal: "",
+        nySvar: "Svaret kommer innen kort tid.",
+        nyRating: 0
+    };
+
     
     constructor(props) {
         super(props);
@@ -29,47 +39,48 @@ export default class Home extends Component {
 
     async componentDidMount() {
         {/*Feilhåndtering*/}
-        const { data } = await axios.get("/");
+        const { data } = await axios.get("/api/service");
         
         this.setState({ faqs: data });
         this.setState({ filtrert: data });       
     }
 
-    velgKategori = (e) => {
-        console.log(e.target.value)
+    HandleKategori = (e) => {
         this.setState({ nyKategori: e.target.value });
+        
     }
 
-    nyttSporsmaal = (e) => {
+    HandleSporsmaal = (e) => {
         this.setState({ nySporsmaal: e.target.value });
     }
 
-    bedreRating = (id) => {
+    HandleBedreRating = (id) => {
+    }
+
+    HandleDaarligereRating = (id) => {
     }
 
   
-    sendInnSporsmaal = async (e) => {
-        {/*Feilhåndtering*/ }
-        const id = this.state.faqs.length + 1;
-        const nyFaq = {
-            id: id,
-            sporsmaal : this.state.nySporsmaal,
-            svar: this.state.nySvar,
-            kategori: this.state.nyKategori, 
-            rating: this.state.nyRating
-        }
-       
-        {/*Feilhåndtering*/ }
-        await axios.post("/", { nyFaq }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        console.log(nyFaq)
+    HandleSubmit = async (e) => {
+      
+            e.preventDefault();
+            const Id  = this.state.faqs.length + 1;
+            const Sporsmaal = this.state.nySporsmaal;
+            const Svar = this.state.nySvar;
+            const Kategori = this.state.nyKategori;
+            const Rating = this.state.nyRating;
+            console.log(Id, Sporsmaal, Svar, Kategori, Rating)
+            await axios.post('/api/service', {
+                Id: Id,
+                Sporsmaal: Sporsmaal,
+                Svar: Svar,
+                Kategori: Kategori,
+                Rating: Rating,
+            });
+            
     }
    
     render() {
-        
         return (
             <div id="faq">
                 <h2> Velkommen til NOR-WAY FAQ </h2>
@@ -82,14 +93,14 @@ export default class Home extends Component {
 
                 {/* Skjema for å legge til nytt spørsmål */}
                 <Collapse in={this.state.open}>
-                    <Form onSubmit={this.sendInnSporsmaal}>
+                    <Form onSubmit={this.HandleSubmit}>
                    
-                        <Form.Control onChange={this.velgKategori.bind(this)}
+                        <Form.Control
+                            onChange={this.HandleKategori.bind(this)}
                             as="select"
-                            value={this.state.nyKategori}
                             className="mr-sm-2"
                             id="inlineFormCustomSelect" custom>
-
+                            <option value="">Velg Kategori</option>
                             <option value="Bestilling">Bestilling</option>
                             <option value="Reise">Reise</option>
                             <option value="Rutetabell">Rutetabell</option>
@@ -97,7 +108,7 @@ export default class Home extends Component {
 
                         <Form.Group controlId="question">
                             <Form.Label>Still ditt spørsmål:</Form.Label>
-                            <Form.Control onChange={this.nyttSporsmaal} placeholder="Hva lurer jeg på?" />
+                            <Form.Control onChange={this.HandleSporsmaal} placeholder="Hva lurer jeg på?" />
                         </Form.Group>
                         {/* Svaret til spørsmålet er bare i webappen for syns skyld. Ved utvidelse kan en FAQ vedlikeholdes.*/}
                         <Form.Group controlId="answer">

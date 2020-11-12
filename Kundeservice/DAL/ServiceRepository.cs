@@ -16,7 +16,7 @@ namespace Kundeservice.DAL
         {
             _db = db;
         }
-        
+
 
         public async Task<List<Faqs>> HentAlle()
         {
@@ -74,6 +74,24 @@ namespace Kundeservice.DAL
             {
                 return false;
             }
+        }
+
+
+
+        public async Task<bool> Endre(Faq innFaq)
+        {
+            try
+            {
+                var endreRating = await _db.Faqs.FindAsync(innFaq.Id);
+                endreRating.Rating = innFaq.Rating;
+                await _db.SaveChangesAsync();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

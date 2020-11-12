@@ -72,5 +72,22 @@ namespace Kundeservice.Controllers
             _log.LogInformation("Feil i inputvalidering");
             return BadRequest();
         }
+
+        [HttpPut]
+        public async Task<ActionResult> Endre(Faq innFaq)
+        {
+            if (ModelState.IsValid)
+            {
+                bool returOK = await _db.Endre(innFaq);
+                if (!returOK)
+                {
+                    _log.LogInformation("Endringen kunne ikke utføres");
+                    return NotFound();
+                }
+                return Ok();
+            }
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest();
+        }
     }
 }
