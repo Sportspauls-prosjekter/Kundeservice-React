@@ -35,7 +35,7 @@ export default class Home extends Component {
         };
     }
 
-
+   
 
     async componentDidMount() {
         {/*Feilhåndtering*/}
@@ -44,6 +44,8 @@ export default class Home extends Component {
         this.setState({ faqs: data });
         this.setState({ filtrert: data });       
     }
+
+    /* EventHandlers for skjemadata  */
 
     HandleKategori = (e) => {
         this.setState({ nyKategori: e.target.value });
@@ -54,31 +56,40 @@ export default class Home extends Component {
         this.setState({ nySporsmaal: e.target.value });
     }
 
-    HandleBedreRating = (id) => {
+    /* EventHandlers for oppdatert rating  */
+
+
+    HandleBedreRating = (e) => {
+        e.preventDefault();
+        console.log(e.target.value)
+        for (let faq in this.state.faqs) {
+            if (this.state.faqs[faq].id == e.target.value) {
+                this.state.faqs[faq].rating++;
+                console.log("Ny rating", this.state.faqs[faq].rating, this.state.faqs[faq].id )
+                
+            }
+            
+        }
+        this.setState(this.state.faqs)
+
     }
 
-    HandleDaarligereRating = (id) => {
+    HandleDaarligereRating = (e) => {
+        e.preventDefault();
+        console.log(e.target.value)
+        for (let faq in this.state.faqs) {
+            console.log(this.state.faqs[faq].id)
+            if (this.state.faqs[faq].id == e.target.value) {
+                this.state.faqs[faq].rating--;
+                console.log("Ny rating", this.state.faqs[faq].rating, this.state.faqs[faq].id)
+
+            }
+        }
+        this.setState(this.state.faqs)
     }
 
   
-    HandleSubmit = async (e) => {
-      
-            e.preventDefault();
-            const Id  = this.state.faqs.length + 1;
-            const Sporsmaal = this.state.nySporsmaal;
-            const Svar = this.state.nySvar;
-            const Kategori = this.state.nyKategori;
-            const Rating = this.state.nyRating;
-            console.log(Id, Sporsmaal, Svar, Kategori, Rating)
-            await axios.post('/api/service', {
-                Id: Id,
-                Sporsmaal: Sporsmaal,
-                Svar: Svar,
-                Kategori: Kategori,
-                Rating: Rating,
-            });
-            
-    }
+  
    
     render() {
         return (
@@ -147,9 +158,9 @@ export default class Home extends Component {
                             <Card>
                                 { /*TODO: Sortere basert på rating */}
                             <Card.Body>
-                            <Button className="endreRating" variant="success">+</Button>
+                                    <Button className="endreRating" value={faq.id} onClick={this.HandleBedreRating} variant="success">+</Button>
                              {faq.rating}
-                            <Button className="endreRating" variant="danger">-</Button>
+                                    <Button className="endreRating" value={faq.id} onClick={this.HandleDaarligereRating}  variant="danger">-</Button>
                             </Card.Body>
                     </Card> </Col>
                         </Row>
