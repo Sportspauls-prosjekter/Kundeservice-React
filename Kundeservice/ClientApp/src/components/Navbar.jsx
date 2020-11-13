@@ -5,7 +5,7 @@ import '../Style/navbar.css';
 export default class NavBar extends Component {
     render() {
         return (
-            
+
             <div id="navbar">
                 <Link to="/losning">
                     <img
@@ -16,9 +16,9 @@ export default class NavBar extends Component {
                 <ul>
                     <li><Link to="/"> Kundeservice </Link></li>
                     <li><Link to="/kontakt"> Kontakt oss</Link></li>
-                </ul>   
-                </div>
-            
+                </ul>
+            </div>
+
         );
     }
 }

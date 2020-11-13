@@ -9,12 +9,16 @@ namespace Kundeservice.Model
     public class Faq
     {
         public int Id { get; set; }
+
         [RegularExpression(@"[a-zA-ZæøåÆØÅ 0-9 . \( \) - / \?]{7,80}")]
         public string Sporsmaal { get; set; }
+
         [RegularExpression(@"[a-zA-ZæøåÆØÅ . \( \) / - !]{7,80}")]
         public string Svar { get; set; }
+
         [RegularExpression(@"[a-zA-ZæøåÆØÅ]{3,15}")]
         public string Kategori { get; set; }
+
         public int Rating { get; set; }
     }
 }

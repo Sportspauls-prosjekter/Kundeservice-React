@@ -8,15 +8,12 @@ namespace Kundeservice.DAL
 {
     public class ServiceRepository : IServiceRepository
     {
-
         private readonly ServiceContext _db;
-
 
         public ServiceRepository(ServiceContext db)
         {
             _db = db;
         }
-
 
         public async Task<List<Faqs>> HentAlle()
         {
@@ -29,7 +26,6 @@ namespace Kundeservice.DAL
                     Svar = faq.Svar,
                     Kategori = faq.Kategori,
                     Rating = faq.Rating
-
                 }).ToListAsync();
                 return alleSporsmaal;
             }
@@ -75,8 +71,6 @@ namespace Kundeservice.DAL
                 return false;
             }
         }
-
-
 
         public async Task<bool> Endre(Faq innFaq)
         {

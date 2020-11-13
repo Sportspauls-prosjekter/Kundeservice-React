@@ -14,7 +14,6 @@ namespace Kundeservice.Controllers
     [ApiController]
     public class ServiceController : ControllerBase
     {
-
         private IServiceRepository _db;
 
         private ILogger<ServiceController> _log;
@@ -29,7 +28,7 @@ namespace Kundeservice.Controllers
         public async Task<ActionResult> HentAlle()
         {
             List<Faqs> sporsmaalene = await _db.HentAlle();
-            if(sporsmaalene.IsNullOrEmpty())
+            if (sporsmaalene.IsNullOrEmpty())
             {
                 _log.LogWarning("Ingen Spørsmål funnet");
                 return NotFound();
@@ -38,7 +37,7 @@ namespace Kundeservice.Controllers
             return Ok(sporsmaalene);
         }
 
-       [HttpGet("{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult> HentEn(int id)
         {
             if (ModelState.IsValid)
@@ -67,13 +66,13 @@ namespace Kundeservice.Controllers
                     _log.LogInformation("Spørsmålsobjektet kunne ikke lagres!");
                     return BadRequest();
                 }
-                return Ok(); 
+                return Ok();
             }
             _log.LogInformation("Feil i inputvalidering");
             return BadRequest();
         }
 
-        [HttpPatch]
+        [HttpPut]
         public async Task<ActionResult> Endre(Faq innFaq)
         {
             if (ModelState.IsValid)

@@ -76,7 +76,6 @@ namespace Kundeservice.DAL
             db.Faqs.Add(faq6);
 
             db.SaveChanges();
-
         }
     }
 }
