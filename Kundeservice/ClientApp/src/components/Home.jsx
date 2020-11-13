@@ -190,7 +190,7 @@ export default class Home extends Component {
                     <Card>
                         <Card.Header>
                             <Accordion.Toggle as={Card.Header} variant="link" eventKey="0">
-                                {faq.sporsmaal} ({faq.kategori})
+                                {faq.sporsmaal} ({faq.kategori}) <i className="arrow down"></i>
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
