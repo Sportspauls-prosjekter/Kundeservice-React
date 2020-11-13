@@ -10,10 +10,16 @@ import axios from "axios";
 import '../Style/home.css';
 
 
+let liste = [];
+
 export default class Home extends Component {
+
+    
     state = {
         faqs: [],
-        filtrert: [],
+        filterBes: [],
+        filterReise: [],
+        filterRutetab: [],
         open: false,
         nyKategori: "",
         nySporsmaal: "",
@@ -26,7 +32,9 @@ export default class Home extends Component {
         super(props);
         this.state = {
             faqs: [],
-            filtrert: [],
+            filterBes: [],
+            filterReise: [],
+            filterRutetab: [],
             open: false,
             nyKategori : "",
             nySporsmaal : "",
@@ -38,11 +46,30 @@ export default class Home extends Component {
    
 
     async componentDidMount() {
-        {/*Feilhåndtering*/}
+        {/*Feilhåndtering*/ }
         const { data } = await axios.get("/api/service");
-        
+
         this.setState({ faqs: data });
-        this.setState({ filtrert: data });       
+        
+        this.setState({ filterBes: data });  
+        this.setState({ filterReise: data }); 
+        this.setState({ filterRutetab: data }); 
+    }
+
+    filterListe = (e) => {
+        e.preventDefault();
+        if (e.target.value == "Reise") {
+            console.log("Reise")
+            liste = this.state.filterReise;
+        } else if (e.target.value == "Bestilling") {
+            console.log("Bestilling")
+            liste = this.state.filterReise;
+        } else if (e.target.value == "Rutetabell") {
+            console.log("Rutetabell")
+            liste = this.state.filterRutetab;
+        } else {
+            console.log("Fungerer ikke")
+        }
     }
 
     /* EventHandlers for skjemadata  */
@@ -56,49 +83,96 @@ export default class Home extends Component {
         this.setState({ nySporsmaal: e.target.value });
     }
 
+    HandleSubmit =  async (e) => {
+        e.preventDefault();
+        const Id = this.state.faqs.length + 1;
+        const Sporsmaal = this.state.nySporsmaal;
+        const Svar = this.state.nySvar;
+        const Kategori = this.state.nyKategori;
+        const Rating = this.state.nyRating;
+        const nyFaq = {
+            Id: Id, 
+            Sporsmaal: Sporsmaal,
+            Svar: Svar,
+            Kategori: Kategori,
+            Rating: Rating
+        }
+        await axios.post("/api/service", nyFaq);
+        
+
+        const { data } = await axios.get("/api/service");
+
+        this.setState({ faqs: data }); 
+
+        for ( let faq in this.state.faqs) {
+            console.log(this.state.faqs[faq])
+        }
+    }
+
     /* EventHandlers for oppdatert rating  */
 
-
+    /*TODO: Legge til put-request*/
     HandleBedreRating = (e) => {
         e.preventDefault();
+      
         console.log(e.target.value)
         for (let faq in this.state.faqs) {
             if (this.state.faqs[faq].id == e.target.value) {
                 this.state.faqs[faq].rating++;
                 console.log("Ny rating", this.state.faqs[faq].rating, this.state.faqs[faq].id )
                 
+                const id = this.state.faqs[faq].id
+                const endret = this.state.faqs[faq]
+                this.UpdateRating(id, endret)
+                
             }
             
         }
+        
         this.setState(this.state.faqs)
-
     }
 
+    /*TODO: Legge til put-request*/ 
     HandleDaarligereRating = (e) => {
         e.preventDefault();
+      
         console.log(e.target.value)
         for (let faq in this.state.faqs) {
             console.log(this.state.faqs[faq].id)
             if (this.state.faqs[faq].id == e.target.value) {
                 this.state.faqs[faq].rating--;
                 console.log("Ny rating", this.state.faqs[faq].rating, this.state.faqs[faq].id)
-
+                
+              
+                const id = this.state.faqs[faq].id
+                const endret = this.state.faqs[faq]
+                this.UpdateRating(id, endret)
+                console.log(endret)
+                
             }
         }
+       
         this.setState(this.state.faqs)
+        
+    }
+
+    //Oppdatere rating i databasen
+    UpdateRating(id, endret) {
+        axios.put("/api/service/" + id, { endret }, { headers: { "Content-Type": "text/plain" } })
     }
 
   
   
    
     render() {
+        liste = this.state.faqs;
         return (
             <div id="faq">
                 <h2> Velkommen til NOR-WAY FAQ </h2>
                 {/*TODO: filtrere og vise på siden*/}
-                <Button className="kategori" value="Reise" variant="primary"> Reise </Button>
-                <Button className="kategori" value="Bestilling" variant="primary"> Bestilling </Button>
-                <Button className="kategori" value="Rutetabell" variant="primary"> Rutetabell </Button>
+                <Button className="kategori" onClick={this.filterListe} value="Reise" variant="primary"> Reise </Button>
+                <Button className="kategori" onClick={this.filterListe} value="Bestilling" variant="primary"> Bestilling </Button>
+                <Button className="kategori" onClick={this.filterListe} value="Rutetabell" variant="primary"> Rutetabell </Button>
                 <Button variant="success" className="kategori" id="lagre" onClick={() => this.setState({open: !this.state.open })} >
                     Nytt spørsmål </Button>
 
@@ -138,7 +212,7 @@ export default class Home extends Component {
                 </Collapse>
 
                 {/* Presentasjon av FAQ-objektene ved hjelp av Collapse-objekter */}
-                {this.state.filtrert.map(faq => <Accordion key={faq.id}>
+                {liste.map(faq => <Accordion key={faq.id}>
                     <Row>
                         <Col sm={9} >
                     <Card>

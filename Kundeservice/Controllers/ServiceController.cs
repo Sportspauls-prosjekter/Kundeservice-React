@@ -73,7 +73,7 @@ namespace Kundeservice.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<ActionResult> Endre(Faq innFaq)
         {
             if (ModelState.IsValid)
